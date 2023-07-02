@@ -11,7 +11,7 @@ import { twMerge } from "tailwind-merge";
 import { SetNonNullable } from "type-fest";
 
 const tabRootStyles = cva(
-  "text-black flex flex-col data-[orientation=vertical]:flex-row",
+  "text-black flex  flex-col data-[orientation=vertical]:flex-row",
   {
     variants: {},
   }
@@ -22,13 +22,16 @@ const tabListStyles = cva(
     variants: {},
   }
 );
-const tabStyles = cva("text-black", {
-  variants: {
-    variant: {
-      outlined: "activeTab:ring-2",
+const tabStyles = cva(
+  "text-slate-50 w-fit px-3 py-3 rounded-lg transition-all duration-300  data-activeTab:bg-primary bg-gray-400",
+  {
+    variants: {
+      variant: {
+        outlined: "",
+      },
     },
-  },
-});
+  }
+);
 const tabContentStyles = cva("text-black", {
   variants: {},
 });
@@ -63,13 +66,12 @@ export const TabContent = (props: TabsContentProps) => {
   return <RadixTabs.Content className={tabContentClasses} {...rest} />;
 };
 
-
 export type TabVariantsProps = VariantProps<typeof tabStyles>;
 
 export type TabProps = RadixTabProps & SetNonNullable<TabVariantsProps>;
 
 export const Tab = (props: TabProps) => {
   const { className, variant = "outlined", ...rest } = props;
-  const tabClasses = twMerge(tabStyles({variant}), className);
+  const tabClasses = twMerge(tabStyles({ variant }), className);
   return <RadixTabs.Trigger className={tabClasses} {...rest} />;
 };

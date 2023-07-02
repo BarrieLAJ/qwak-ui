@@ -74,7 +74,7 @@ const ImportTaxes = () => {
     setTotalImportTax(totalImportTax);
   };
   return (
-    <Box className="flex w-full flex-col gap-4 md:max-w-2xl">
+    <Box className="flex w-full flex-col gap-4 max-h-full md:max-w-2xl">
       <LabeledInputField
         htmlFor="basic-salary"
         id="cost"

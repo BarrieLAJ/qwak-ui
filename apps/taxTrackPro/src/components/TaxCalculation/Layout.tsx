@@ -11,7 +11,7 @@ const TaxCaculationLayout = () => {
   return (
     <Tabs
       defaultValue={route}
-      className="max-h-[100%] mx-auto gap-6 w-full max-w-xl"
+      className="max-h-[100%] mx-auto gap-6 w-full max-w-2xl"
       onValueChange={(value) => {
         push(value);
       }}
@@ -25,7 +25,7 @@ const TaxCaculationLayout = () => {
           );
         })}
       </TabsList>
-      <Box className="w-full p-2 overflow-y-scroll">
+      <Box className="w-full p-2 max-h-[100%] overflow-y-scroll">
         {tabsList.map(({ url, content }, key) => {
           const Content = content;
           return (

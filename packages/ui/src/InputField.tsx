@@ -5,7 +5,7 @@ import { SetNonNullable } from "type-fest";
 import { Box } from "./Box";
 
 const inputRootStyles = cva(
-  "appearance-none text-black text-base flex w-max items-center ring-1 ring-slate-500 focus-within:ring-2 rounded gap-1.5 outline-none border-2",
+  "appearance-none text-black text-base flex w-max items-center ring-1 ring-slate-500 focus-within:ring-2 rounded gap-1.5 outline-none",
   {
     variants: {
       intent: {
@@ -15,7 +15,7 @@ const inputRootStyles = cva(
       variant: {
         outlined: "bg-transparent",
       },
-      size: {
+      inputSize: {
         sm: "py-1 px-1.5 h-6 text-xs",
         md: "py-1 px-2.5 h-8",
         lg: "py-1 px-3 h-10",
@@ -30,7 +30,7 @@ const inputRootStyles = cva(
     defaultVariants: {
       intent: "primary",
       variant: "outlined",
-      size: "md"
+      inputSize: "md"
     },
     compoundVariants: [],
   }
@@ -61,7 +61,7 @@ export type InputFieldVariantsProps = VariantProps<typeof inputRootStyles>;
 
 export interface InputProps
   extends SetNonNullable<InputFieldVariantsProps>,
-    HTMLAttributes<HTMLInputElement> {
+  React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   startElement?: React.ReactNode;
   endElement?: React.ReactNode;
   containerClassName?: string;
@@ -75,15 +75,16 @@ export const InputField = (props: InputProps) => {
     className,
     containerClassName,
     intent,
-    size,
+    inputSize,
+    fullWidth,
     ...rest
   } = props;
   const inputClasses = twMerge(
-    inputStyles({ variant: variant, intent }),
+    inputStyles({ variant: variant, intent, fullWidth }),
     className
   );
   const inputRootClasses = twMerge(
-    inputRootStyles({ variant: variant, intent, size }),
+    inputRootStyles({ variant: variant, intent, inputSize, fullWidth }),
     containerClassName
   );
   return (

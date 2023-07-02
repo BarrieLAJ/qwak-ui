@@ -6,12 +6,14 @@ import { SetNonNullable } from "type-fest";
 import { Box } from "./Box";
 
 const buttonStyles = cva(
-  "appearance-none text-base p-3 flex w-max rounded gap-1 outline-none border-0",
+  "appearance-none text-base p-3 flex w-max transition-colors rounded gap-1 outline-none border-0",
   {
     variants: {
       intent: {
-        primary: "text-textPrimary bg-primary",
-        secondary: "text-textSecondary bg-secondary",
+        primary:
+          "text-textPrimary  bg-primary transition-colors duration-500 disabled:bg-slate-200 disabled:cursor-not-allowed",
+        secondary:
+          "text-textSecondary bg-secondary disabled:bg-slate-200 disabled:cursor-not-allowed",
       },
       variant: {
         filled: "",
@@ -86,15 +88,15 @@ type ButtonOrLinkProps = {
   // | ((props: ButtonOrLinkProps["asProps"]) => React.ReactNode);
   href?: string;
   asProps?: any;
-} & HTMLAttributes<HTMLButtonElement & HTMLAnchorElement>;
+} & React.DetailedHTMLProps<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
 
 const ButtonORLink = (props: ButtonOrLinkProps) => {
   const { as, href, asProps, ...rest } = props;
   if (href || as) {
     if (as) {
-      // if (typeof as == "function") {
-      //   return as(asProps) as React.ReactNode;
-      // } else {
       const Comp = as;
       return <Comp {...props} {...asProps} />;
       // }

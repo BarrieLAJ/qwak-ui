@@ -23,7 +23,7 @@ const meta = {
       defaultValue: "priamry",
       options: ["primary", "secondary"],
     },
-    size: {
+    inputSize: {
       control: "select",
       defaultValue: "md",
       options: ["sm", "md", "lg"],

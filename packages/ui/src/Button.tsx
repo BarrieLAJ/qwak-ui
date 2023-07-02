@@ -1,6 +1,6 @@
 "use-client";
 import { VariantProps, cva } from "class-variance-authority";
-import React, { HTMLAttributes } from "react";
+import React, { HTMLAttributes, ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 import { SetNonNullable } from "type-fest";
 import { Box } from "./Box";
@@ -82,27 +82,26 @@ export const Button = (props: ButtonProps) => {
 };
 
 type ButtonOrLinkProps = {
-  as?:React.ReactNode
-    | ((props: ButtonOrLinkProps["asProps"]) => React.ReactNode);
+  as?: React.ComponentType<ButtonOrLinkProps["asProps"]>;
+  // | ((props: ButtonOrLinkProps["asProps"]) => React.ReactNode);
   href?: string;
   asProps?: any;
 } & HTMLAttributes<HTMLButtonElement & HTMLAnchorElement>;
 
 const ButtonORLink = (props: ButtonOrLinkProps) => {
   const { as, href, asProps, ...rest } = props;
-  if (href && !as) {
-    return <a href={href} {...props} />;
+  if (href || as) {
+    if (as) {
+      // if (typeof as == "function") {
+      //   return as(asProps) as React.ReactNode;
+      // } else {
+      const Comp = as;
+      return <Comp {...props} {...asProps} />;
+      // }
+    } else {
+      return <a href={href} {...props} />;
+    }
   }
-  // if (as) {
-  //   let Comp;
-  //   if (typeof as == "function") {
-  //     Comp = as(asProps);
-  //     return <Comp />
-  //   } else {
-  //     Comp = as;
-  //   }
-  //   return <Comp {...asProps} />;
-  // }
 
   return <button {...rest} />;
 };

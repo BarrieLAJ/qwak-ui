@@ -16,6 +16,10 @@ module.exports = {
         textPrimary: colors.white
       },
     },
+    data: {
+      activeTab: 'state~="active"',
+      inactiveTab: 'state~="inactive"'
+    }
   },
   plugins: [],
 };

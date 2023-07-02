@@ -5,62 +5,47 @@ import { SetNonNullable } from "type-fest";
 import { Box } from "./Box";
 
 const inputRootStyles = cva(
-  "appearance-none text-base p-3 flex w-max rounded gap-1 outline-none border-0",
+  "appearance-none text-black text-base flex w-max items-center ring-1 ring-slate-500 focus-within:ring-2 rounded gap-1.5 outline-none border-2",
   {
     variants: {
       intent: {
-        primary: "text-textPrimary bg-primary",
-        secondary: "text-textSecondary bg-secondary",
+        primary: "focus-within:ring-primary",
+        secondary: "focus-within:ring-secondary",
       },
       variant: {
-        filled: "",
-        outlined: "ring-1 bg-transparent",
-        text: "bg-transparent, ring-0 focus:ring-0",
+        outlined: "bg-transparent",
       },
       size: {
-        sm: "py-1 px-2 h-6 text-xs",
-        md: "py-1 px-3 h-8",
-        lg: "py-2 px-4 h-10",
+        sm: "py-1 px-1.5 h-6 text-xs",
+        md: "py-1 px-2.5 h-8",
+        lg: "py-1 px-3 h-10",
       },
       fullWidth: {
         true: "w-full",
       },
+      error: {
+        true: "ring-red-600"
+      }
     },
     defaultVariants: {
       intent: "primary",
+      variant: "outlined",
+      size: "md"
     },
-    compoundVariants: [
-      {
-        intent: "primary",
-        variant: "outlined",
-        className: "ring-primary text-primary",
-      },
-      {
-        intent: "secondary",
-        variant: "outlined",
-        className: "ring-secondary text-secondary",
-      },
-      { intent: "primary", variant: "text", className: "text-primary" },
-      { intent: "secondary", variant: "text", className: "text-secondary" },
-    ],
+    compoundVariants: [],
   }
 );
 
 const inputStyles = cva(
-  "appearance-none text-base p-3 flex w-max rounded gap-1 outline-none border-0",
+  "appearance-none  text-base p-1 w-max rounded bg-transparent focus:outline-none gap-1",
   {
     variants: {
       intent: {
-        primary: "text-textPrimary bg-primary",
-        secondary: "text-textSecondary bg-secondary",
+        primary: "bg-none",
+        secondary: "bg-none",
       },
       variant: {
-        outlined: "ring-1 bg-transparent",
-      },
-      size: {
-        sm: "py-1 px-2 h-6 text-xs",
-        md: "py-1 px-3 h-8",
-        lg: "py-2 px-4 h-10",
+        outlined: "bg-transparent",
       },
       fullWidth: {
         true: "w-full",
@@ -69,22 +54,10 @@ const inputStyles = cva(
     defaultVariants: {
       intent: "primary",
     },
-    compoundVariants: [
-      {
-        intent: "primary",
-        variant: "outlined",
-        className: "ring-primary text-primary",
-      },
-      {
-        intent: "secondary",
-        variant: "outlined",
-        className: "ring-secondary text-secondary",
-      },
-    ],
   }
 );
 
-export type InputFieldVariantsProps = VariantProps<typeof inputStyles>;
+export type InputFieldVariantsProps = VariantProps<typeof inputRootStyles>;
 
 export interface InputProps
   extends SetNonNullable<InputFieldVariantsProps>,
@@ -106,7 +79,7 @@ export const InputField = (props: InputProps) => {
     ...rest
   } = props;
   const inputClasses = twMerge(
-    inputStyles({ variant: variant, intent, size }),
+    inputStyles({ variant: variant, intent }),
     className
   );
   const inputRootClasses = twMerge(
@@ -117,7 +90,7 @@ export const InputField = (props: InputProps) => {
     <Box className={inputRootClasses}>
       {startElement && <Box className="box-border">{startElement}</Box>}
       <input className={inputClasses} {...rest} />
-      {endElement && <Box className="box-border">{endElement}</Box>}endElement
+      {endElement && <Box className="box-border">{endElement}</Box>}
     </Box>
   );
 };

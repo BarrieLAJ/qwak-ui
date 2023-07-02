@@ -1,16 +1,14 @@
-// Button.stories.ts|tsx
 
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 
-import { Button } from "ui";
-
+import { InputField } from "ui";
 
 const meta = {
-  title: "Qwak-UI/Button",
-  component: Button,
+  title: "Qwak-UI/InputField",
+  component: InputField,
   tags: ["autodocs"],
-  args: { children: "Button" },
+  args: {  },
   argTypes: {
     children: {
       control: false,
@@ -31,13 +29,13 @@ const meta = {
       options: ["sm", "md", "lg"],
     },
   },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof InputField>;
 
 export default meta;
-type Story = StoryObj<typeof Button>;
+type Story = StoryObj<typeof InputField>;
 
 const Template: Story = {
-  render: (args) => <Button {...args} />,
+  render: (args) => <InputField {...args} />,
 };
 
 export const Primary: Story = {
@@ -56,7 +54,7 @@ export const Secondary: Story = {
 
 export const WithStartElement: Story = {
   ...Template,
-  render: (args) => <Button {...args} startElement={<div>O</div>} />,
+  render: (args) => <InputField {...args} startElement={<div>O</div>} />,
   args: {
     intent: "secondary",
   },
@@ -64,21 +62,8 @@ export const WithStartElement: Story = {
 
 export const WithEndElement: Story = {
   ...Template,
-  render: (args) => <Button {...args} endElement={<div>O</div>} />,
+  render: (args) => <InputField {...args} endElement={<div>O</div>} />,
   args: {
     intent: "secondary",
-  },
-};
-
-export const IconOnly: Story = {
-  ...Template,
-  render: (args) => (
-    <Button {...args}>
-      <div>O</div>
-    </Button>
-  ),
-  args: {
-    intent: "primary",
-    size: "md",
   },
 };

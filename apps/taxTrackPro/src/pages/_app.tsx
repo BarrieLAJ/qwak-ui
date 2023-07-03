@@ -4,7 +4,7 @@ import { type AppType } from "next/app";
 import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import "ui/styles.css";
-
+import AuthGaurd from "~/components/Guard/AuthGaurd";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -12,6 +12,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
+      <AuthGaurd session={session} />
       <Component {...pageProps} />
     </SessionProvider>
   );

@@ -6,8 +6,7 @@ import TaxLaws from "~/scenes/taxLaws";
 const TaxLawPage = () => {
   return (
     <Layout>
-      
-        <TaxLaws />
+      <TaxLaws />
     </Layout>
   );
 };

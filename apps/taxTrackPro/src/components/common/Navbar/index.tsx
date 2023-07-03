@@ -1,10 +1,19 @@
 import React, { ReactNode } from "react";
 import { Box, Divider, Button } from "ui";
-import { DocumentRegular, NoteRegular, CalculatorMultipleRegular, SignOutRegular } from "@fluentui/react-icons";
+import {
+  DocumentRegular,
+  NoteRegular,
+  CalculatorMultipleRegular,
+  SignOutRegular,
+} from "@fluentui/react-icons";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
+import { useUserInfo } from "~/hooks/useUserInfo";
+import Image from "next/image";
 
 const Navbar = () => {
+  const { user } = useUserInfo();
   return (
     <div className="bg-primary flex max-h-screen min-h-screen w-full max-w-xs flex-col items-center px-8 pb-9 pt-14">
       <Box className="flex h-full w-full flex-1 flex-col justify-between">
@@ -20,22 +29,36 @@ const Navbar = () => {
             <NavLink href="/tax-laws" icon={<NoteRegular />}>
               Tax Law
             </NavLink>
-            <NavLink href="/tax-calculators" icon={<CalculatorMultipleRegular />}>
+            <NavLink
+              href="/tax-calculators"
+              icon={<CalculatorMultipleRegular />}
+            >
               Tax Calculators
             </NavLink>
           </Box>
           <Box className="w-full flex-[0] justify-self-end">
-            <Box className="h-6 w-6 rounded-full bg-white" />
-            <h2 className="mb-2 text-lg text-white">Barrie Potter</h2>
+            <Box className="relative block h-16 w-16 rounded-full">
+              <Image
+                className="aspect-square h-16 w-16 object-cover rounded-full"
+                src={user?.image!}
+                height={64}
+                width={64}
+                alt={user?.name!}
+              />
+            </Box>
+            <h2 className="mb-2 text-lg text-white">{user?.name}</h2>
             <Divider className="my-3 bg-white" />
           </Box>
         </Box>
       </Box>
       <Box className="w-full flex-[0]">
         <Button
-          href="#"
+          // href="#"
           fullWidth
           startElement={<SignOutRegular />}
+          onClick={() => {
+            signOut();
+          }}
           className="text-white"
           variant="outlined"
           size="md"

@@ -1,6 +1,4 @@
-import { signIn, signOut, useSession } from "next-auth/react";
 import Layout from "~/components/common/Layout";
-import Payee from "~/scenes/calculators/Payee";
 import { Box } from "ui";
 import TaxCaculationLayout from "~/components/TaxCalculation/Layout";
 
@@ -9,32 +7,9 @@ export default function PayeeCalculation() {
     <Layout>
       <Box className="flex w-full mt-20 justify-center py-2">
         <TaxCaculationLayout />
-        {/* <Payee /> */}
       </Box>
     </Layout>
   );
 }
 
-// function AuthShowcase() {
-//   const { data: sessionData } = useSession();
 
-//   const { data: secretMessage } = api.example.getSecretMessage.useQuery(
-//     undefined, // no input
-//     { enabled: sessionData?.user !== undefined }
-//   );
-
-//   return (
-//     <div className="flex flex-col items-center justify-center gap-4">
-//       <p className="text-center text-2xl text-white">
-//         {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-//         {secretMessage && <span> - {secretMessage}</span>}
-//       </p>
-//       <button
-//         className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-//         onClick={sessionData ? () => void signOut() : () => void signIn()}
-//       >
-//         {sessionData ? "Sign out" : "Sign in"}
-//       </button>
-//     </div>
-//   );
-// }

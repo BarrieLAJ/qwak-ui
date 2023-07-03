@@ -13,6 +13,7 @@ import { type Session } from "next-auth";
 import superjson from "superjson";
 import { ZodError } from "zod";
 import { getServerAuthSession } from "~/server/auth";
+import { SanityClient, createClient as sanityClient } from "@sanity/client";
 import { prisma } from "~/server/db";
 
 /**
@@ -25,6 +26,7 @@ import { prisma } from "~/server/db";
 
 type CreateContextOptions = {
   session: Session | null;
+  sanityClient: SanityClient;
 };
 
 /**
@@ -40,6 +42,7 @@ type CreateContextOptions = {
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
     session: opts.session,
+    client: opts.sanityClient,
     prisma,
   };
 };
@@ -55,9 +58,18 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
 
   // Get the session from the server using the getServerSession wrapper function
   const session = await getServerAuthSession({ req, res });
+  const sanClient = sanityClient({
+    projectId: "a1631hx2", // you can find this in sanity.json
+    dataset: "production", // or the name you chose in step 1
+    useCdn: true, // `false` if you want to ensure fresh data
+    token:
+      "skeujZqX6qyB6hdgQN38SzILIQs3YK1UYEsPGcnT42M7ci57gMU1hBtYBRPegZrxujl6oc04FoVLXyhGNzMuBRBq2sUMyHOVtLB5EO6OIK0NDOkO9OFhpgIqWURffsdMJtuyWORip0iXaWWFAHWlfkDNryPGfAqGvW1sXt9ZCTPz1bviaAJ3",
+    apiVersion: "2021-10-21", // change to `v2` if you want to use the new API
+  });
 
   return createInnerTRPCContext({
     session,
+    sanityClient: sanClient,
   });
 };
 

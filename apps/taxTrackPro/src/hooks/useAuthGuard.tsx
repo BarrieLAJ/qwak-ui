@@ -1,4 +1,4 @@
-import type { Session } from "next-auth";
+"use client"
 import { signIn, useSession } from "next-auth/react";
 import { useEffect } from "react";
 

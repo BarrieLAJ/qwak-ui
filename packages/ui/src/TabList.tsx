@@ -1,3 +1,4 @@
+"use client"
 import React, { ReactNode } from "react";
 import * as RadixTabs from "@radix-ui/react-tabs";
 import type {

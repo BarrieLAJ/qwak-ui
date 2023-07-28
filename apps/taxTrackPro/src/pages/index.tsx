@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext } from "next";
-export const getServerSideProps = (context: GetServerSidePropsContext) => {
+export const getServerSideProps = (_context: GetServerSidePropsContext) => {
   return {
     redirect: {
         destination: "/documents",

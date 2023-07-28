@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { Button } from "ui";
+// import { Button } from "ui";
 
 export const metadata: Metadata = {
   title: "TaxTrackPro",
@@ -8,9 +8,9 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div>
-      <Button fullWidth href="https://github.com" intent="primary" size="sm">
+      {/* <Button fullWidth href="https://github.com" intent="primary" size="sm">
         something
-      </Button>
+      </Button> */}
     </div>
   );
 }
